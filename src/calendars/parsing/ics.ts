@@ -86,8 +86,16 @@ function icsToOFC(input: ical.Event): OFCEvent {
                 ? { allDay: true }
                 : {
                       allDay: false,
-                      startTime: getTime(input.startDate),
-                      endTime: getTime(input.endDate),
+                      startTime: getTime(
+						  input.startDate.convertToZone(
+                              ical.Timezone.utcTimezone
+                          )
+					  ),
+                      endTime: getTime(
+						  input.endDate.convertToZone(
+                              ical.Timezone.utcTimezone
+                          )
+					  ),
                   }),
         };
     }
